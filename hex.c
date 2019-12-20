@@ -64,6 +64,8 @@ again:
 			str[i] = '.';
 
 		if ((ch = fgetc(fp)) == EOF) {
+			if (i < 8)
+				(void) fputc(' ', stdout);
 			while (++i < LINE) {
 				(void) fputs("   ", stdout);
 				str[i] = ' ';
@@ -71,6 +73,9 @@ again:
 			(void) fprintf(stdout, "| %s\n", str);
 			goto out;
 		}
+
+		if (i == 7)
+			(void) fputc(' ', stdout);
 	}
 	(void) fprintf(stdout, "| %s\n", str);
 	s += LINE;
